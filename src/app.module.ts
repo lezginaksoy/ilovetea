@@ -14,7 +14,7 @@ import { CoffeesModule } from './coffees/coffees.module';
       username: 'postgres',
       password: '1',
       autoLoadEntities: true,
-      synchronize: true,
+      synchronize: false,
     }),
   ],
   controllers: [AppController],
