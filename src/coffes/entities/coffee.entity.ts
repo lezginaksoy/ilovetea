@@ -9,13 +9,17 @@ export class Coffee {
   name: string;
   @Column()
   brand: string;
-
+@Column({default:0})
+  recommendation:number
 
   //@Column('json',{nullable:true})
   @JoinTable()
   @ManyToMany(
     type=>Flavor,
     flavor=>flavor.coffees,
+    {
+      cascade:true,
+    }
     )
-  flavors: string[];  
+  flavors: Flavor[];  
 }

@@ -57,6 +57,13 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
+##More
+//netstat -ano|findstr "PID :3000" 
+// Proto Local Address Foreign Address State PID 
+// TCP 0.0.0.0:3000 0.0.0.0:0 LISTENING 18264
+// To kill this process (the /f is force):
+// taskkill /pid 18264 /f
+
 
 ## Support
 

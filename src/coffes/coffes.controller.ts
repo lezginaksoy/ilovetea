@@ -8,6 +8,7 @@ import {
   Post,
   Query,
 } from '@nestjs/common';
+import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto/pagination-query.dto';
 import { CoffeesService } from 'src/services/coffees/coffees.service';
 import { CreateCoffeeDto } from './dto/create-coffee.dto/create-coffee.dto';
 import { UpdateCoffeeDto } from './dto/update-coffee.dto/update-coffee.dto';
@@ -16,14 +17,16 @@ import { UpdateCoffeeDto } from './dto/update-coffee.dto/update-coffee.dto';
 export class CoffesController {
   constructor(private readonly coffeService: CoffeesService) {}
   @Get()
-  findAll() {
-    return this.coffeService.findAll();
-  }
-  @Get('paging')
-  findAll2(@Query() pagingQuery) {
+  findAll(@Query() pagingQuery:PaginationQueryDto) {
     const { limit, offset } = pagingQuery;
-    return `This Action return all coffes. Limit:${limit} offset:${offset}`;
+    return this.coffeService.findAll(pagingQuery);
+    //return this.coffeService.findAll();
   }
+  // @Get('paging')
+  // findAll2(@Query() pagingQuery:PaginationQueryDto) {
+   
+  //   //return `This Action return all coffes. Limit:${limit} offset:${offset}`;
+  // }
 
   @Get(':id')
   findOne(@Param('id') id: number) {
