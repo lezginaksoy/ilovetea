@@ -87,16 +87,18 @@ npx typeorm migration:revert -d dist/typeorm-cli.config
 // Let TypeOrm generate migrations (for you)
 npx typeorm migration:generate src/migrations/SchemaSync -d dist/typeorm-cli.config
 
+//advanced use-cases where we might need Custom Providers:
+* Creating a custom instance of our provider instead of having Nest instantiate the class for us
+* Or let’s say we want to reuse an existing class in a second dependency
+* How about if we want to override a class with a mock version for testing
+* And lastly, what if we want to use a Strategy Pattern in which we can provide an abstract class and interchange the real implementation (or actual class that is to be used) based on different conditions
 
 ## Support
 
 Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
 
 ## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
 - Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
 
 ## License
 

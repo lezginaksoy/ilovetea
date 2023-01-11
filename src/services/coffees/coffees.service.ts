@@ -1,11 +1,14 @@
 import {
   HttpException,
   HttpStatus,
+  Inject,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
+import { Injector } from '@nestjs/core/injector/injector';
 import { InjectRepository } from '@nestjs/typeorm';
 import { type } from 'os';
+import { COFFEE_BRANDS } from 'src/coffees/coffees.constants';
 import { CreateCoffeeDto } from 'src/coffes/dto/create-coffee.dto/create-coffee.dto';
 import { UpdateCoffeeDto } from 'src/coffes/dto/update-coffee.dto/update-coffee.dto';
 import { Coffee } from 'src/coffes/entities/coffee.entity';
@@ -20,8 +23,11 @@ export class CoffeesService {
     @InjectRepository(Coffee) private readonly coffeeRepo: Repository<Coffee>,
     @InjectRepository(Flavor) private readonly flavorRepo: Repository<Flavor>,
     private readonly datasource:DataSource,
-    
-  ) {}
+    @Inject(COFFEE_BRANDS) coffeeBrands:string[]
+    //@Inject('COFFEE_BRANDS') coffeeBrands:string[],    
+  ) {
+console.log(coffeeBrands);
+  }
 
   // private coffees: Coffee[] = [
   //   {
