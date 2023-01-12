@@ -4,7 +4,10 @@ import {
   Inject,
   Injectable,
   NotFoundException,
+  Scope,
 } from '@nestjs/common';
+import { REQUEST } from '@nestjs/core';
+import{Request} from 'express';
 import { Injector } from '@nestjs/core/injector/injector';
 import { InjectRepository } from '@nestjs/typeorm';
 import { type } from 'os';
@@ -17,16 +20,18 @@ import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto/paginati
 import { Events } from 'src/events/entities/event.entity/event.entity';
 import { DataSource, Repository } from 'typeorm';
 
-@Injectable()
+@Injectable({scope:Scope.REQUEST})
 export class CoffeesService {
   constructor(
     @InjectRepository(Coffee) private readonly coffeeRepo: Repository<Coffee>,
     @InjectRepository(Flavor) private readonly flavorRepo: Repository<Flavor>,
     private readonly datasource:DataSource,
-    @Inject(COFFEE_BRANDS) coffeeBrands:string[]
+    @Inject(COFFEE_BRANDS) coffeeBrands:string[],
+    @Inject(REQUEST) private readonly request: Request
     //@Inject('COFFEE_BRANDS') coffeeBrands:string[],    
   ) {
-console.log(coffeeBrands);
+//console.log(coffeeBrands);
+console.log('CoffeeService instantied!')
   }
 
   // private coffees: Coffee[] = [
@@ -111,7 +116,8 @@ console.log(coffeeBrands);
   }
 
 async recommendCoffe(coffee:Coffee){
-    const queryRunner=this.datasource.createQueryRunner();
+
+  const queryRunner=this.datasource.createQueryRunner();
 await queryRunner.connect();
 await queryRunner.startTransaction();
 try {
@@ -126,15 +132,14 @@ await queryRunner.manager.save(coffee);
 await queryRunner.manager.save(recommendEvent);
 
 
-  await queryRunner.commitTransaction();
+await queryRunner.commitTransaction();
 } catch (error) {
   await queryRunner.rollbackTransaction();
 }
 finally{
   await queryRunner.release();
 }
-
-
-  }
+  
+}
 
 }

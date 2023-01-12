@@ -15,7 +15,9 @@ import { UpdateCoffeeDto } from './dto/update-coffee.dto/update-coffee.dto';
 
 @Controller('coffes')
 export class CoffesController {
-  constructor(private readonly coffeService: CoffeesService) {}
+  constructor(private readonly coffeService: CoffeesService) {
+    console.log('CoffeeController instantied!');
+  }
   @Get()
   findAll(@Query() pagingQuery:PaginationQueryDto) {
     const { limit, offset } = pagingQuery;
