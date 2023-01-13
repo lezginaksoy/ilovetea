@@ -1,4 +1,5 @@
 import { Injectable, Module, Scope } from '@nestjs/common';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { env } from 'process';
 import { CoffesController } from 'src/coffes/coffes.controller';
@@ -10,6 +11,7 @@ import { TeasService } from 'src/services/teas/teas.service';
 import { TeasController } from 'src/teas/teas.controller';
 import { Connection } from 'typeorm';
 import { COFFEE_BRANDS } from './coffees.constants';
+import coffeeConfig from './config/coffees.config';
 
 @Injectable()
 export class CoffeeBrandsFactory{
@@ -24,12 +26,12 @@ export class CoffeeBrandsFactory{
 // class ProdConfigService{}
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Coffee, Flavor,Events])],
+  imports: [TypeOrmModule.forFeature([Coffee, Flavor,Events]),ConfigModule.forFeature(coffeeConfig)],
   controllers: [CoffesController, TeasController],  
   exports:[CoffeesService],
   //providers: [CoffeesService, TeasService],
 
- providers: [CoffeesService, TeasService,CoffeeBrandsFactory,
+ providers: [CoffeesService, TeasService,CoffeeBrandsFactory,ConfigService,
     {
       provide:COFFEE_BRANDS, 
       useFactory:(brandFactory:CoffeeBrandsFactory)=>brandFactory.create(), scope:Scope.TRANSIENT,
