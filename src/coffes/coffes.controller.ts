@@ -10,9 +10,11 @@ import {
   UsePipes,
   ValidationPipe,
   UseGuards,
-  UseFilters
+  UseFilters,
+  SetMetadata
 } from '@nestjs/common';
 import { ValidationTypes } from 'class-validator';
+import { Public } from 'src/common/decorators/public.decorator';
 import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto/pagination-query.dto';
 import { CoffeesService } from 'src/services/coffees/coffees.service';
 import { CreateCoffeeDto } from './dto/create-coffee.dto/create-coffee.dto';
@@ -28,7 +30,9 @@ export class CoffesController {
   }
 
   //Method-scoped, 
-  @UsePipes(ValidationPipe)
+  //@UsePipes(ValidationPipe)
+  //@SetMetadata('isPublic',true)
+  @Public() // metadata decorator 
   @Get()
   findAll(@Query() pagingQuery:PaginationQueryDto) {
     const { limit, offset } = pagingQuery;

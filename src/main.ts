@@ -16,7 +16,7 @@ async function bootstrap() {
       }
     }),
   );
-  app.useGlobalGuards(new ApiKeyGuard());
+  //app.useGlobalGuards(new ApiKeyGuard());
   app.useGlobalFilters(new HttpExceptionFilter());//for global
   await app.listen(3000);
 }
