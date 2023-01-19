@@ -3,6 +3,8 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { HttpExceptionFilter } from './common/filters/http-exception/http-exception.filter';
 import { ApiKeyGuard } from './common/guards/api-key/api-key.guard';
+import { TimeoutInterceptor } from './common/interceptors/timeout/timeout.interceptor';
+import { WrapResponseInterceptor } from './common/interceptors/wrap-response/wrap-response.interceptor';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -16,8 +18,10 @@ async function bootstrap() {
       }
     }),
   );
+  
+  app.useGlobalInterceptors(new WrapResponseInterceptor(),new TimeoutInterceptor());
   //app.useGlobalGuards(new ApiKeyGuard());
-  app.useGlobalFilters(new HttpExceptionFilter());//for global
+  //app.useGlobalFilters(new HttpExceptionFilter());//for global
   await app.listen(3000);
 }
 bootstrap();

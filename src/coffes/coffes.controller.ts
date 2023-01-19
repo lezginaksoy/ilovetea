@@ -14,8 +14,10 @@ import {
   SetMetadata
 } from '@nestjs/common';
 import { ValidationTypes } from 'class-validator';
+import { resolve } from 'path';
 import { Public } from 'src/common/decorators/public.decorator';
 import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto/pagination-query.dto';
+import { ParseIntPipe } from 'src/common/pipes/parse-int/parse-int.pipe';
 import { CoffeesService } from 'src/services/coffees/coffees.service';
 import { CreateCoffeeDto } from './dto/create-coffee.dto/create-coffee.dto';
 import { UpdateCoffeeDto } from './dto/update-coffee.dto/update-coffee.dto';
@@ -34,8 +36,9 @@ export class CoffesController {
   //@SetMetadata('isPublic',true)
   @Public() // metadata decorator 
   @Get()
-  findAll(@Query() pagingQuery:PaginationQueryDto) {
+  async findAll(@Query() pagingQuery:PaginationQueryDto) {
     const { limit, offset } = pagingQuery;
+    //await new Promise(resolve=>setTimeout(resolve,3000));
     return this.coffeService.findAll(pagingQuery);
     //return this.coffeService.findAll();
   }
@@ -45,9 +48,11 @@ export class CoffesController {
   //   //return `This Action return all coffes. Limit:${limit} offset:${offset}`;
   // }
 
+  @Public() // metadata decorator 
   @Get(':id')
-  findOne(@Param('id') id: number) {
+  findOne(@Param('id',ParseIntPipe) id: number) {
     console.log(typeof id);
+    
     return this.coffeService.findOne('' + id);
     //return `This Action return #${id} coffe`;
   }

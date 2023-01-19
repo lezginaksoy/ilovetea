@@ -17,7 +17,7 @@ implements ExceptionFilter {
    response.status(status).json({
     ...error,
     timestamp: new Date().toISOString(),
-    himalaya:'sdfsdgfdg',
+    himalaya:'test 12',
   });
   
   }
