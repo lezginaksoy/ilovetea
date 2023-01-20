@@ -29,9 +29,9 @@ export class CoffeesService {
     @InjectRepository(Flavor) private readonly flavorRepo: Repository<Flavor>,
     private readonly datasource:DataSource,
     private readonly configService:ConfigService,
-    @Inject(COFFEE_BRANDS) coffeeBrands:string[],
-    @Inject(REQUEST) private readonly request: Request,
-    @Inject(coffeesConfig.KEY) private readonly coffeesConfiguration: ConfigType<typeof coffeesConfig>
+    // @Inject(COFFEE_BRANDS) coffeeBrands:string[],
+    // @Inject(REQUEST) private readonly request: Request,
+     //@Inject(coffeesConfig.KEY) private readonly coffeesConfiguration: ConfigType<typeof coffeesConfig>
 
     //@Inject('COFFEE_BRANDS') coffeeBrands:string[],    
   ) {
@@ -41,7 +41,7 @@ console.log('CoffeeService instantied!');
 const  databaseHost=this.configService.get('database.host','localhost');
 
 console.log(databaseHost);
-console.log(coffeesConfiguration.taste);
+//console.log(coffeesConfiguration.taste);
 
   }
 

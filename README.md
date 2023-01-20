@@ -97,9 +97,37 @@ npx typeorm migration:generate src/migrations/SchemaSync -d dist/typeorm-cli.con
 
 Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
 
+## Test
+// For unit tests
+npm run test 
+// Run a unit test for a -specific- file pattern
+npm run test:watch -- coffees.service
+
+
+// For unit tests + collecting testing coverage
+npm run test:cov
+
+// For e2e tests
+npm run test:e2e
+
 ## Stay in touch
 - Website - [https://nestjs.com](https://nestjs.com/)
 
 ## License
 
 Nest is [MIT licensed](LICENSE).
+
+
+## TEST
+Unit Tests
+For unit tests In NestJS, it’s a common practice to keep the spec files in the same folder as the application source code files that they test. 
+
+Each controller, provider, service, etc. should have its own dedicated test file. The test file extension must be (dot).spec.ts (this is so that integrated test tooling can identify it as a test file with test suites).
+
+End-to-End (e2e) Tests
+For e2e tests, these files are typically located in a dedicated `test` directory by default. e2e tests are typically grouped into separate files by the feature or functionality that they test. The file extension must be (dot).e2e-spec.ts. 
+
+How are they different?
+While unit tests focus on individual classes and functions…
+
+e2e tests are great for high-level validation of the entire system. e2e testing covers the interaction of classes and modules at a more aggregate level -- closer to the kind of interaction that end-users will have with the production system. 
