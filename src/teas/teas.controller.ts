@@ -10,7 +10,9 @@ import {
   Post,
   Res,
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Teas')
 @Controller('teas')
 export class TeasController {
   @Get('EarlGrey')

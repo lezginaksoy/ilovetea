@@ -13,6 +13,7 @@ import {
   UseFilters,
   SetMetadata
 } from '@nestjs/common';
+import { ApiForbiddenResponse, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ValidationTypes } from 'class-validator';
 import { resolve } from 'path';
 import { Protocol } from 'src/common/decorators/protocol.decorator';
@@ -26,6 +27,7 @@ import { UpdateCoffeeDto } from './dto/update-coffee.dto/update-coffee.dto';
 //Controller-scoped, 
 //@UsePipes(ValidationPipe)
 //@UsePipes(new ValidationPipe())
+@ApiTags('Coffees')
 @Controller('coffees')
 export class CoffesController {
   constructor(private readonly coffeService: CoffeesService) {
@@ -35,6 +37,8 @@ export class CoffesController {
   //Method-scoped, 
   //@UsePipes(ValidationPipe)
   //@SetMetadata('isPublic',true)
+  //@ApiResponse({status:403, description:'Forbidden.'})
+  //@ApiForbiddenResponse({description:'forbidden !'})
   @Public() // metadata decorator 
   @Get()
   async findAll(@Protocol('https')protocol:string,@Query() pagingQuery:PaginationQueryDto) {

@@ -23,7 +23,7 @@ async function bootstrap() {
   
   app.useGlobalInterceptors(new WrapResponseInterceptor(),new TimeoutInterceptor());
   //app.useGlobalGuards(new ApiKeyGuard());
-  //app.useGlobalFilters(new HttpExceptionFilter());//for global
+  //app.useGlobalFilters(new HttpExceptionFilter());//for global filters
 
 const options=new DocumentBuilder().setTitle('IluvTea').setDescription('Tea application :)').setVersion('1.0').build();
 const document=SwaggerModule.createDocument(app,options);
