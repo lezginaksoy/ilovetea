@@ -15,6 +15,7 @@ import {
 } from '@nestjs/common';
 import { ValidationTypes } from 'class-validator';
 import { resolve } from 'path';
+import { Protocol } from 'src/common/decorators/protocol.decorator';
 import { Public } from 'src/common/decorators/public.decorator';
 import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto/pagination-query.dto';
 import { ParseIntPipe } from 'src/common/pipes/parse-int/parse-int.pipe';
@@ -25,7 +26,7 @@ import { UpdateCoffeeDto } from './dto/update-coffee.dto/update-coffee.dto';
 //Controller-scoped, 
 //@UsePipes(ValidationPipe)
 //@UsePipes(new ValidationPipe())
-@Controller('coffes')
+@Controller('coffees')
 export class CoffesController {
   constructor(private readonly coffeService: CoffeesService) {
     console.log('CoffeeController instantied!');
@@ -36,12 +37,16 @@ export class CoffesController {
   //@SetMetadata('isPublic',true)
   @Public() // metadata decorator 
   @Get()
-  async findAll(@Query() pagingQuery:PaginationQueryDto) {
+  async findAll(@Protocol('https')protocol:string,@Query() pagingQuery:PaginationQueryDto) {
     const { limit, offset } = pagingQuery;
+    console.log('protocol :'+ protocol);
     //await new Promise(resolve=>setTimeout(resolve,3000));
     return this.coffeService.findAll(pagingQuery);
     //return this.coffeService.findAll();
   }
+
+
+
   // @Get('paging')
   // findAll2(@Query() pagingQuery:PaginationQueryDto) {
    
