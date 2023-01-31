@@ -8,7 +8,7 @@ import { CoffeeRatingService } from './services/coffee-rating/coffee-rating.serv
 import { DatabaseModule } from './modules/database/database.module';
 import { ConfigModule } from '@nestjs/config';
 import Joi from '@hapi/joi';
-import appConfig from 'config/app.config';
+import appConfig from 'src/config/app.config';
 import { APP_PIPE } from '@nestjs/core';
 import { CommonModule } from './common/common.module';
 
@@ -39,12 +39,12 @@ import { CommonModule } from './common/common.module';
     CoffeesModule,
     // TypeOrmModule.forRoot({
     //   type: 'postgres',
-    //   host: process.env.DATABASE_HOST,
-    //   port: +process.env.DATABASE_PORT,
-    //   username: process.env.DATABASE_NAME,
-    //   password: process.env.DATABASE_PASSWORD,
-    //   autoLoadEntities: true,
-    //   synchronize: false,
+    //   // host: process.env.DATABASE_HOST,
+    //   // port: +process.env.DATABASE_PORT,
+    //   // username: process.env.DATABASE_NAME,
+    //   // password: process.env.DATABASE_PASSWORD,
+    //   // autoLoadEntities: true,
+    //   // synchronize: false,
     // }),
     CoffeeRatingModule,
     DatabaseModule,

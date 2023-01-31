@@ -22,7 +22,8 @@ import { DataSource, Repository } from 'typeorm';
 import { ConfigService, ConfigType } from '@nestjs/config';
 import coffeesConfig from 'src/coffees/config/coffees.config';
 
-@Injectable({scope:Scope.REQUEST})
+//@Injectable({scope:Scope.REQUEST})
+@Injectable()
 export class CoffeesService {
   constructor(
     @InjectRepository(Coffee) private readonly coffeeRepo: Repository<Coffee>,

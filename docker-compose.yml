@@ -6,8 +6,20 @@ services:
     ports:
       - "5432:5432"
     environment:
-       POSTGRES_PASSWORD: pass123
+       POSTGRES_PASSWORD: 1
+       POSTGRES_USER: postgres
+       POSTGRES_HOST_AUTH_METHOD: "trust"
+  test-db:
+    image:  postgres
+    restart: always 
+    ports:
+      - "5433:5432"
+    environment:
+       POSTGRES_PASSWORD: 1
        POSTGRES_USER: postgres
        POSTGRES_HOST_AUTH_METHOD: "trust"
 
-//docker run -d -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=pass123 --name ilovetea -p 5432:5432  --restart=always postgres
+
+
+
+# docker run -d -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=pass123 --name ilovetea -p 5432:5432  --restart=always postgres
